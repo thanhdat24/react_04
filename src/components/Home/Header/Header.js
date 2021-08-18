@@ -71,6 +71,26 @@ export default function Header(props) {
                 Profile
               </NavLink>
             </li>
+            <li className="nav-item dropdown">
+              <a
+                className="nav-link dropdown-toggle"
+                href="#"
+                id="dropdownId"
+                data-toggle="dropdown"
+                aria-haspopup="true"
+                aria-expanded="false"
+              >
+                Bài Tập
+              </a>
+              <div className="dropdown-menu" aria-labelledby="dropdownId">
+                <NavLink className="dropdown-item" to="/todolistrcc">
+                  To Do List RCC
+                </NavLink>
+                <NavLink className="dropdown-item" to="/todolistrfc">
+                  To Do List RFC
+                </NavLink>
+              </div>
+            </li>
           </ul>
           <form className="form-inline my-2 my-lg-0">
             <button
