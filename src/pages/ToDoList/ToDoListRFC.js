@@ -1,11 +1,12 @@
+import {} from "./ToDoList.css";
+
 import React from "react";
-import style from "./ToDoList.css";
 
 export default function ToDoListRFC() {
   return (
     <div className="card">
       <div className="card__header">
-        <img src="./assets/background.png" />
+        <img src="./assets/background.png" alt="background" />
       </div>
       {/* <h2>hello!</h2> */}
       <div className="card__body">
