@@ -7,6 +7,12 @@ import axios from "axios";
 export default class ToDoListRCC extends Component {
   state = {
     taskList: [],
+    values: {
+      taskName: "",
+    },
+    errors: {
+      taskName: "",
+    },
   };
   getTaskList = () => {
     let promise = axios({
@@ -21,8 +27,10 @@ export default class ToDoListRCC extends Component {
       this.setState({
         taskList: results.data,
       });
+      console.log("Thành Công");
     });
     promise.catch((err) => {
+      console.log("Thất bại");
       console.log(err.response.data);
     });
   };
@@ -66,16 +74,59 @@ export default class ToDoListRCC extends Component {
         );
       });
   };
+  componentDidMount = () => {
+    this.getTaskList();
+  };
+
+  handleChange = (e) => {
+    let { value, name } = e.target;
+    console.log(value, name);
+    let newValues = { ...this.state.values };
+    newValues = { ...newValues, [name]: value };
+    let newErrors = { ...this.state.errors };
+    let regexString = /^[a-z A-z]+$/;
+    if (!regexString.test(value) || value.trim() === "") {
+      newErrors[name] = name + " is not a valid";
+    } else newErrors[name] = "";
+
+    this.setState({
+      ...this.state,
+      values: newValues,
+      errors: newErrors,
+    });
+  };
+  addTask = (e) => {
+    // Dừng sự kiện submit form
+    e.preventDefault();
+    console.log(this.state.values.taskName);
+    let promise = axios({
+      url: "http://svcy.myclass.vn/api/ToDoList/AddTask",
+      method: "POST",
+      data: {
+        taskName: this.state.values.taskName,
+      },
+    });
+    // Xử lý thành công
+    promise.then((results) => {
+      // console.log(results.data);
+      this.getTaskList();
+    });
+
+    // Xử lý thất bại
+    promise.catch((error) => {
+      alert(error.response.data);
+    });
+  };
   render() {
     return (
-      <div>
-        <button
+      <form onSubmit={this.addTask}>
+        {/* <button
           onClick={() => {
             this.getTaskList();
           }}
         >
           Get task list
-        </button>
+        </button> */}
         <div className="card">
           <div className="card__header">
             <img src="./assets/background.png" alt="background" />
@@ -89,6 +140,8 @@ export default class ToDoListRCC extends Component {
               </div>
               <div className="card__add">
                 <input
+                  onChange={this.handleChange}
+                  name="taskName"
                   id="newTask"
                   type="text"
                   placeholder="Enter an activity..."
@@ -97,6 +150,9 @@ export default class ToDoListRCC extends Component {
                   <i className="fa fa-plus" />
                 </button>
               </div>
+              <p className="text text-danger mb-0">
+                {this.state.errors.taskName}
+              </p>
               <div className="card__todo">
                 {/* Uncompleted tasks */}
                 <ul className="todo" id="todo">
@@ -110,7 +166,7 @@ export default class ToDoListRCC extends Component {
             </div>
           </div>
         </div>
-      </div>
+      </form>
     );
   }
 }
