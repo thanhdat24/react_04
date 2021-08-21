@@ -8,8 +8,9 @@ import {
 } from "../../redux/actions/ToDoListAction";
 import { useDispatch, useSelector } from "react-redux";
 
-import axios from "axios";
-
+// Action có 2 loại
+// Action thực thi ngay làm thay đổi reducer (action 1)
+// Action phải thực hiện xử lí rồi mới gọi action 1 thực thi (async action)
 export default function ToDoListRedux() {
   const { taskList } = useSelector((state) => state.ToDoListReducer);
   const dispatch = useDispatch();
@@ -39,17 +40,6 @@ export default function ToDoListRedux() {
     });
   };
 
-  const addTask = (e) => {
-    e.preventDefault();
-    // Xử lý nhận dữ liệu từ người dùng => gọi action addTaskApi()
-    dispatch(addTaskApi(state.values.taskName));
-  };
-  const getTaskList = () => {
-    dispatch(getTaskListApi());
-  };
-  useEffect(() => {
-    getTaskList();
-  }, []);
   const renderTaskToDo = () => {
     return taskList
       .filter((item) => !item.status)
@@ -115,6 +105,17 @@ export default function ToDoListRedux() {
         );
       });
   };
+  const addTask = (e) => {
+    e.preventDefault();
+    // Xử lý nhận dữ liệu từ người dùng => gọi action addTaskApi()
+    dispatch(addTaskApi(state.values.taskName));
+  };
+  const getTaskList = () => {
+    dispatch(getTaskListApi());
+  };
+  useEffect(() => {
+    getTaskList();
+  }, []);
   const deleteTask = (taskName) => {
     dispatch(deleteTaskApi(taskName));
   };
