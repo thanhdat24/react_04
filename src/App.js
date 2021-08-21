@@ -13,6 +13,7 @@ import Profile from "./pages/Profile/Profile";
 import React from "react";
 import ToDoListRCC from "./pages/ToDoList/ToDoListRCC";
 import ToDoListRFC from "./pages/ToDoList/ToDoListRFC";
+import ToDoListRedux from "./pages/ToDoList/ToDoListRedux";
 
 function App() {
   return (
@@ -27,7 +28,7 @@ function App() {
         <Route exact path="/profile" component={Profile} />
         <Route exact path="/todolistrcc" component={ToDoListRCC} />
         <Route exact path="/todolistrfc" component={ToDoListRFC} />
-
+        <Route exact path="/todolistredux" component={ToDoListRedux} />
         <Route exact path="*" component={PageNotFound} />
         <Route exact path="/" component={Home} />
       </Switch>

@@ -89,6 +89,9 @@ export default function Header(props) {
                 <NavLink className="dropdown-item" to="/todolistrfc">
                   To Do List RFC
                 </NavLink>
+                <NavLink className="dropdown-item" to="/todolistredux">
+                  To Do List Redux
+                </NavLink>
               </div>
             </li>
           </ul>
