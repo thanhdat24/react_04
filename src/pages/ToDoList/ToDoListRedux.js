@@ -1,8 +1,14 @@
 import React, { useEffect, useState } from "react";
+import {
+  addTaskApi,
+  checkTaskApi,
+  deleteTaskApi,
+  getTaskListApi,
+  rejectTaskApi,
+} from "../../redux/actions/ToDoListAction";
 import { useDispatch, useSelector } from "react-redux";
 
 import axios from "axios";
-import { getTaskAction } from "../../redux/actions/ToDoListAction";
 
 export default function ToDoListRedux() {
   const { taskList } = useSelector((state) => state.ToDoListReducer);
@@ -35,41 +41,11 @@ export default function ToDoListRedux() {
 
   const addTask = (e) => {
     e.preventDefault();
-    let promise = axios({
-      url: "http://svcy.myclass.vn/api/ToDoList/AddTask",
-      method: "POST",
-      data: {
-        taskName: state.values.taskName,
-      },
-    });
-    // Xử lý thành công
-    promise.then((results) => {
-      // console.log(results.data);
-      getTaskList();
-    });
-
-    // Xử lý thất bại
-    promise.catch((error) => {
-      alert(error.response.data);
-    });
+    // Xử lý nhận dữ liệu từ người dùng => gọi action addTaskApi()
+    dispatch(addTaskApi(state.values.taskName));
   };
   const getTaskList = () => {
-    let promise = axios({
-      url: "http://svcy.myclass.vn/api/ToDoList/GetAllTask",
-      method: "GET",
-    });
-
-    promise.then((results) => {
-      console.log(results.data);
-      // Nếu kết quả success
-      // => set lại state của component
-      dispatch(getTaskAction(results.data));
-      console.log("Thành Công");
-    });
-    promise.catch((err) => {
-      console.log("Thất bại");
-      console.log(err.response.data);
-    });
+    dispatch(getTaskListApi());
   };
   useEffect(() => {
     getTaskList();
@@ -140,43 +116,13 @@ export default function ToDoListRedux() {
       });
   };
   const deleteTask = (taskName) => {
-    let promise = axios({
-      url: `http://svcy.myclass.vn/api/ToDoList/deleteTask?taskName=${taskName}`,
-      method: "DELETE",
-    });
-    promise.then((results) => {
-      alert(results.data);
-      getTaskList();
-    });
-    promise.catch((err) => {
-      alert(err.response.data);
-    });
+    dispatch(deleteTaskApi(taskName));
   };
   const checkTask = (taskName) => {
-    let promise = axios({
-      url: `http://svcy.myclass.vn/api/ToDoList/doneTask?taskName=${taskName}`,
-      method: "PUT",
-    });
-    promise.then((results) => {
-      alert(results.data);
-      getTaskList();
-    });
-    promise.catch((err) => {
-      alert(err.response.data);
-    });
+    dispatch(checkTaskApi(taskName));
   };
   const rejectTask = (taskName) => {
-    let promise = axios({
-      url: `http://svcy.myclass.vn/api/ToDoList/rejectTask?taskName=${taskName}`,
-      method: "PUT",
-    });
-    promise.then((results) => {
-      alert(results.data);
-      getTaskList();
-    });
-    promise.catch((err) => {
-      alert(err.response.data);
-    });
+    dispatch(rejectTaskApi(taskName));
   };
   return (
     <div className="card">
