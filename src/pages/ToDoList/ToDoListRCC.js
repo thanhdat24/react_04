@@ -34,6 +34,7 @@ export default class ToDoListRCC extends Component {
       console.log(err.response.data);
     });
   };
+  // Done task
   renderTaskToDo = () => {
     return this.state.taskList
       .filter((item) => !item.status)
@@ -42,10 +43,22 @@ export default class ToDoListRCC extends Component {
           <li key={index}>
             <span>{item.taskName}</span>
             <div className="buttons">
-              <button className="remove">
+              <button
+                className="remove"
+                type="button"
+                onClick={() => {
+                  this.deleteTask(item.taskName);
+                }}
+              >
                 <i className="fa fa-trash-alt" />
               </button>
-              <button className="complete">
+              <button
+                className="complete"
+                type="button"
+                onClick={() => {
+                  this.checkTask(item.taskName);
+                }}
+              >
                 <i className="far fa-check-circle" />
                 <i className="fas fa-check-circle" />
               </button>
@@ -54,6 +67,7 @@ export default class ToDoListRCC extends Component {
         );
       });
   };
+  // Task completed
   renderTaskToDoDone = () => {
     return this.state.taskList
       .filter((item) => item.status)
@@ -62,18 +76,74 @@ export default class ToDoListRCC extends Component {
           <li key={index}>
             <span>{item.taskName}</span>
             <div className="buttons">
-              <button className="remove">
+              <button
+                className="remove"
+                type="button"
+                onClick={() => {
+                  this.deleteTask(item.taskName);
+                }}
+              >
                 <i className="fa fa-trash-alt" />
               </button>
-              <button className="complete">
-                <i className="far fa-check-circle" />
-                <i className="fas fa-check-circle" />
+              <button
+                className="complete"
+                type="button"
+                onClick={() => {
+                  this.rejectTask(item.taskName);
+                }}
+              >
+                <i className="far fa-undo" />
+                <i className="fas fa-undo" />
               </button>
             </div>
           </li>
         );
       });
   };
+  // Reject task
+  rejectTask = (taskName) => {
+    let promise = axios({
+      url: `http://svcy.myclass.vn/api/ToDoList/rejectTask?taskName=${taskName}`,
+      method: "PUT",
+    });
+    promise.then((results) => {
+      alert(results.data);
+      this.getTaskList();
+    });
+    promise.catch((err) => {
+      alert(err.response.data);
+    });
+  };
+  // Check task
+  checkTask = (taskName) => {
+    let promise = axios({
+      url: `http://svcy.myclass.vn/api/ToDoList/doneTask?taskName=${taskName}`,
+      method: "PUT",
+    });
+    promise.then((results) => {
+      alert(results.data);
+      this.getTaskList();
+    });
+    promise.catch((err) => {
+      alert(err.response.data);
+    });
+  };
+
+  // Delete task
+  deleteTask = (taskName) => {
+    let promise = axios({
+      url: `http://svcy.myclass.vn/api/ToDoList/deleteTask?taskName=${taskName}`,
+      method: "DELETE",
+    });
+    promise.then((results) => {
+      alert(results.data);
+      this.getTaskList();
+    });
+    promise.catch((err) => {
+      alert(err.response.data);
+    });
+  };
+
   componentDidMount = () => {
     this.getTaskList();
   };
@@ -120,13 +190,6 @@ export default class ToDoListRCC extends Component {
   render() {
     return (
       <form onSubmit={this.addTask}>
-        {/* <button
-          onClick={() => {
-            this.getTaskList();
-          }}
-        >
-          Get task list
-        </button> */}
         <div className="card">
           <div className="card__header">
             <img src="./assets/background.png" alt="background" />
@@ -144,6 +207,7 @@ export default class ToDoListRCC extends Component {
                   name="taskName"
                   id="newTask"
                   type="text"
+                  required
                   placeholder="Enter an activity..."
                 />
                 <button id="addItem">
