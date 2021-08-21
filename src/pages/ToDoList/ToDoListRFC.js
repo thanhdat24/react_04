@@ -32,8 +32,25 @@ export default function ToDoListRFC(props) {
     });
   };
 
-  const handleSubmit = (e) => {
+  const addTask = (e) => {
     e.preventDefault();
+    let promise = axios({
+      url: "http://svcy.myclass.vn/api/ToDoList/AddTask",
+      method: "POST",
+      data: {
+        taskName: state.values.taskName,
+      },
+    });
+    // Xử lý thành công
+    promise.then((results) => {
+      // console.log(results.data);
+      getTaskList();
+    });
+
+    // Xử lý thất bại
+    promise.catch((error) => {
+      alert(error.response.data);
+    });
   };
   const getTaskList = () => {
     let promise = axios({
@@ -124,16 +141,52 @@ export default function ToDoListRFC(props) {
         );
       });
   };
-  const deleteTask = (taskName) => {};
-  const checkTask = (taskName) => {};
-  const rejectTask = (taskName) => {};
+  const deleteTask = (taskName) => {
+    let promise = axios({
+      url: `http://svcy.myclass.vn/api/ToDoList/deleteTask?taskName=${taskName}`,
+      method: "DELETE",
+    });
+    promise.then((results) => {
+      alert(results.data);
+      getTaskList();
+    });
+    promise.catch((err) => {
+      alert(err.response.data);
+    });
+  };
+  const checkTask = (taskName) => {
+    let promise = axios({
+      url: `http://svcy.myclass.vn/api/ToDoList/doneTask?taskName=${taskName}`,
+      method: "PUT",
+    });
+    promise.then((results) => {
+      alert(results.data);
+      getTaskList();
+    });
+    promise.catch((err) => {
+      alert(err.response.data);
+    });
+  };
+  const rejectTask = (taskName) => {
+    let promise = axios({
+      url: `http://svcy.myclass.vn/api/ToDoList/rejectTask?taskName=${taskName}`,
+      method: "PUT",
+    });
+    promise.then((results) => {
+      alert(results.data);
+      getTaskList();
+    });
+    promise.catch((err) => {
+      alert(err.response.data);
+    });
+  };
   return (
     <div className="card">
       <div className="card__header">
         <img src="./assets/background.png" alt="background" />
       </div>
       {/* <h2>hello!</h2> */}
-      <form className="card__body" onSubmit={handleSubmit}>
+      <form className="card__body" onSubmit={addTask}>
         <div className="card__content">
           <div className="card__title">
             <h2>My Tasks</h2>
