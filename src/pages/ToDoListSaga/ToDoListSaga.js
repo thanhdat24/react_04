@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from "react";
-
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 
 export default function ToDoListSaga() {
   const dispatch = useDispatch();
+  const { taskList } = useSelector((state) => state.ToDoListReducer);
   let [state, setState] = useState({
     taskList: [],
     values: {
@@ -32,7 +32,7 @@ export default function ToDoListSaga() {
   };
 
   const renderTaskToDo = () => {
-    return state.taskList
+    return taskList
       .filter((item) => !item.status)
       .map((item, index) => {
         return (
@@ -65,7 +65,7 @@ export default function ToDoListSaga() {
   };
   // Task completed
   const renderTaskToDoDone = () => {
-    return state.taskList
+    return taskList
       .filter((item) => item.status)
       .map((item, index) => {
         return (
