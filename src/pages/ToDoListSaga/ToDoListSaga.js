@@ -97,8 +97,17 @@ export default function ToDoListSaga() {
       });
   };
   const addTask = (e) => {};
-  const getTaskList = () => {};
-  useEffect(() => {}, []);
+  const getTaskList = () => {
+    // dispatch action saga
+    dispatch({
+      type: "getTaskApiAction",
+      data: "abc",
+    });
+  };
+  useEffect(() => {
+    // Gọi hàm getTaskList
+    getTaskList();
+  }, []);
   const deleteTask = (taskName) => {};
   const checkTask = (taskName) => {};
   const rejectTask = (taskName) => {};
