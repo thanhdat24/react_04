@@ -1,3 +1,7 @@
+import {
+  ADD_TASK_LIST_API,
+  GET_TASK_LIST_API,
+} from "../../redux/constants/ToDoListConst";
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
@@ -96,11 +100,17 @@ export default function ToDoListSaga() {
         );
       });
   };
-  const addTask = (e) => {};
+  const addTask = (e) => {
+    e.preventDefault();
+    dispatch({
+      type: ADD_TASK_LIST_API,
+      taskName: state.values.taskName,
+    });
+  };
   const getTaskList = () => {
     // dispatch action saga
     dispatch({
-      type: "getTaskApiAction",
+      type: GET_TASK_LIST_API,
       data: "abc",
     });
   };

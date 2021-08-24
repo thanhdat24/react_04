@@ -8,5 +8,7 @@ export function* rootSaga() {
   yield all([
     // Nghiệp vụ theo dỗi các action saga todolist
     ListSaga.theoDoiActionGetTaskApi(),
+    ListSaga.theoDoiActionAddTaskApi(),
+    // Nghiệp ...
   ]);
 }

@@ -1,0 +1,3 @@
+export const DiSPLAY_LOADING = "DiSPLAY_LOADING";
+export const HIDE_LOADING = "HIDE_LOADING";
+
