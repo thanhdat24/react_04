@@ -1,5 +1,6 @@
 import {
   call,
+  delay,
   fork,
   put,
   take,
@@ -17,11 +18,19 @@ import { toDoListService } from "../../services/ToDoListService";
   
 */
 function* getTaskApiAction(action) {
+  // Put giống dispatch action
+  yield put({
+    type: "DiSPLAY_LOADING",
+  });
+  yield delay(500);
   let { data, status } = yield call(toDoListService.getTaskApi);
   // sau khi lấy giá trị thành công dùng put (giống dispatch bên thunk)
   yield put({
     type: GET_TASK_API,
     taskList: data,
+  });
+  yield put({
+    type: "HIDE_LOADING",
   });
 }
 

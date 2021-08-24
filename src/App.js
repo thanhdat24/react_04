@@ -7,6 +7,7 @@ import Contact from "./pages/Contact/Contact";
 import Detail from "./pages/Detail/Detail";
 import Header from "./components/Home/Header/Header";
 import Home from "./pages/Home/Home";
+import LoadingComponent from "./components/GlobalSetting/LoadingComponent/LoadingComponent";
 import Login from "./pages/Login/Login";
 import PageNotFound from "./pages/PageNotFound/PageNotFound";
 import Profile from "./pages/Profile/Profile";
@@ -20,6 +21,7 @@ function App() {
   return (
     <BrowserRouter>
       <Header />
+      <LoadingComponent />
       <Switch>
         <Route exact path="/home" component={Home} />
         <Route exact path="/contact" component={Contact} />
