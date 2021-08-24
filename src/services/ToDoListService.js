@@ -18,6 +18,24 @@ export class ToDoListService {
       },
     });
   };
+  deleteTaskApi = (taskName) => {
+    return axios({
+      url: `${DOMAIN}/ToDoList/deleteTask?taskName=${taskName}`,
+      method: "DELETE",
+    });
+  };
+  doneTaskApi = (taskName) => {
+    return axios({
+      url: `${DOMAIN}/ToDoList/doneTask?taskName=${taskName}`,
+      method: "PUT",
+    });
+  };
+  rejectTaskApi = (taskName) => {
+    return axios({
+      url: `${DOMAIN}/ToDoList/rejectTask?taskName=${taskName}`,
+      method: "PUT",
+    });
+  };
 }
 
 export const toDoListService = new ToDoListService();

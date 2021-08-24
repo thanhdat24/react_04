@@ -9,6 +9,10 @@ export function* rootSaga() {
     // Nghiệp vụ theo dỗi các action saga todolist
     ListSaga.theoDoiActionGetTaskApi(),
     ListSaga.theoDoiActionAddTaskApi(),
+    ListSaga.theoDoiActionDeleteTaskApi(),
+    ListSaga.theoDoiActionDoneTaskApi(),
+    ListSaga.theoDoiActionRejectTaskApi(),
+
     // Nghiệp ...
   ]);
 }

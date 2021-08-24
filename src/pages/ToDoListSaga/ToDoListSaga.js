@@ -1,6 +1,9 @@
 import {
   ADD_TASK_LIST_API,
+  DELETE_TASK_LIST_API,
+  DONE_TASK_LIST_API,
   GET_TASK_LIST_API,
+  REJECT_TASK_LIST_API,
 } from "../../redux/constants/ToDoListConst";
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
@@ -118,9 +121,24 @@ export default function ToDoListSaga() {
     // Gọi hàm getTaskList
     getTaskList();
   }, []);
-  const deleteTask = (taskName) => {};
-  const checkTask = (taskName) => {};
-  const rejectTask = (taskName) => {};
+  const deleteTask = (taskName) => {
+    dispatch({
+      type: DELETE_TASK_LIST_API,
+      taskName: taskName,
+    });
+  };
+  const checkTask = (taskName) => {
+    dispatch({
+      type: DONE_TASK_LIST_API,
+      taskName: taskName,
+    });
+  };
+  const rejectTask = (taskName) => {
+    dispatch({
+      type: REJECT_TASK_LIST_API,
+      taskName: taskName,
+    });
+  };
   return (
     <div className="card">
       <button
