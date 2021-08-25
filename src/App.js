@@ -8,6 +8,7 @@ import DemoHOCModal from "./pages/DemoHOCModal/DemoHOCModal";
 import Detail from "./pages/Detail/Detail";
 import Header from "./components/Home/Header/Header";
 import Home from "./pages/Home/Home";
+import { HomeTemplate } from "./templates/HomeTemplate/HomeTemplate";
 import LoadingComponent from "./components/GlobalSetting/LoadingComponent/LoadingComponent";
 import Login from "./pages/Login/Login";
 import Modal from "./HOC/Modal/Modal";
@@ -22,13 +23,34 @@ import ToDoListSaga from "./pages/ToDoListSaga/ToDoListSaga";
 function App() {
   return (
     <BrowserRouter>
-      <Header />
       <Modal />
       <LoadingComponent />
       <Switch>
-        <Route exact path="/home" component={Home} />
-        <Route exact path="/contact" component={Contact} />
-        <Route exact path="/about" component={About} />
+        {/* <Route
+          exact
+          path="/home"
+          render={(propsRoute) => {
+            return (
+              <div>
+                <Header />
+                <Home />
+              </div>
+            );
+          }}
+        /> */}
+        <HomeTemplate path="/home" exact Component={Home} />
+        <HomeTemplate path="/about" exact Component={About} />
+        <Route
+          exact
+          path="/contact"
+          render={(propsRoute) => {
+            return (
+              <div style={{ background: "#fff" }}>
+                <Contact {...propsRoute} />
+              </div>
+            );
+          }}
+        />
         <Route exact path="/login" component={Login} />
         <Route exact path="/detail/:id" component={Detail} />
         <Route exact path="/profile" component={Profile} />
