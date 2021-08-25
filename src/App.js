@@ -4,11 +4,13 @@ import { BrowserRouter, Route, Switch } from "react-router-dom";
 
 import About from "./pages/About/About";
 import Contact from "./pages/Contact/Contact";
+import DemoHOCModal from "./pages/DemoHOCModal/DemoHOCModal";
 import Detail from "./pages/Detail/Detail";
 import Header from "./components/Home/Header/Header";
 import Home from "./pages/Home/Home";
 import LoadingComponent from "./components/GlobalSetting/LoadingComponent/LoadingComponent";
 import Login from "./pages/Login/Login";
+import Modal from "./HOC/Modal/Modal";
 import PageNotFound from "./pages/PageNotFound/PageNotFound";
 import Profile from "./pages/Profile/Profile";
 import React from "react";
@@ -21,6 +23,7 @@ function App() {
   return (
     <BrowserRouter>
       <Header />
+      <Modal />
       <LoadingComponent />
       <Switch>
         <Route exact path="/home" component={Home} />
@@ -33,6 +36,7 @@ function App() {
         <Route exact path="/todolistrfc" component={ToDoListRFC} />
         <Route exact path="/todolistredux" component={ToDoListRedux} />
         <Route exact path="/todolistsaga" component={ToDoListSaga} />
+        <Route exact path="/demohocmodal" component={DemoHOCModal} />
         <Route exact path="*" component={PageNotFound} />
         <Route exact path="/" component={Home} />
       </Switch>
