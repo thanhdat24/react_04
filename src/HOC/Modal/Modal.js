@@ -1,6 +1,9 @@
+import { useDispatch, useSelector } from "react-redux";
+
 import React from "react";
 
-export default function Modal() {
+export default function Modal(props) {
+  let component = useSelector((state) => state.ModalReducer.Component);
   return (
     <div>
       {/* Modal */}
@@ -25,7 +28,7 @@ export default function Modal() {
                 <span aria-hidden="true">×</span>
               </button>
             </div>
-            <div className="modal-body">Body</div>
+            <div className="modal-body">{component}</div>
             <div className="modal-footer">
               <button
                 type="button"
