@@ -19,6 +19,7 @@ import ToDoListRCC from "./pages/ToDoList/ToDoListRCC";
 import ToDoListRFC from "./pages/ToDoList/ToDoListRFC";
 import ToDoListRedux from "./pages/ToDoList/ToDoListRedux";
 import ToDoListSaga from "./pages/ToDoListSaga/ToDoListSaga";
+import DemoDragDrop from "./pages/DemoDragDrop/DemoDragDrop";
 
 function App() {
   return (
@@ -26,20 +27,10 @@ function App() {
       <Modal />
       <LoadingComponent />
       <Switch>
-        {/* <Route
-          exact
-          path="/home"
-          render={(propsRoute) => {
-            return (
-              <div>
-                <Header />
-                <Home />
-              </div>
-            );
-          }}
-        /> */}
         <HomeTemplate path="/home" exact Component={Home} />
         <HomeTemplate path="/about" exact Component={About} />
+        <HomeTemplate path="/dragdrop" exact Component={DemoDragDrop} />
+
         <Route
           exact
           path="/contact"

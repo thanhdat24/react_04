@@ -81,6 +81,16 @@ export default function Header(props) {
                 Demo HOC
               </NavLink>
             </li>
+            <li className="nav-item">
+              <NavLink
+                activeStyle={{ fontWeight: "bold" }}
+                activeClassName="activeNavItem"
+                className="nav-link"
+                to="/dragdrop"
+              >
+                Drag Drop
+              </NavLink>
+            </li>
             <li className="nav-item dropdown">
               <a
                 className="nav-link dropdown-toggle"
