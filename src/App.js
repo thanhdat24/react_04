@@ -20,6 +20,7 @@ import ToDoListRFC from "./pages/ToDoList/ToDoListRFC";
 import ToDoListRedux from "./pages/ToDoList/ToDoListRedux";
 import ToDoListSaga from "./pages/ToDoListSaga/ToDoListSaga";
 import DemoDragDrop from "./pages/DemoDragDrop/DemoDragDrop";
+import DragAndDropDnD from "./pages/DragAndDropDnD/DragAndDropDnD";
 
 function App() {
   return (
@@ -30,7 +31,7 @@ function App() {
         <HomeTemplate path="/home" exact Component={Home} />
         <HomeTemplate path="/about" exact Component={About} />
         <HomeTemplate path="/dragdrop" exact Component={DemoDragDrop} />
-
+        <HomeTemplate path="/dragdropdnd" exact Component={DragAndDropDnD} />
         <Route
           exact
           path="/contact"

@@ -8,6 +8,7 @@ const defaultValue = [
   { id: 4, taskName: "Task 4" },
   { id: 5, taskName: "Task 5" },
 ];
+/*ádadwawd */
 export default function DemoDragDrop(props) {
   const [taskList, setTaskList] = useState(defaultValue);
   const tagDrag = useRef({});
@@ -22,6 +23,7 @@ export default function DemoDragDrop(props) {
       bottom: 0,
     },
     config: { duration: 250 },
+
     reset: true,
   }));
   const handleDragStart = (e, task, index) => {
@@ -58,7 +60,7 @@ export default function DemoDragDrop(props) {
   };
   const handleDragEnd = (e) => {};
   const handleDragDrop = (e) => {
-    console.log("DrapDrop", e.target);
+    // console.log("DrapDrop", e.target);
   };
   return (
     <div
@@ -80,7 +82,28 @@ export default function DemoDragDrop(props) {
         <div className="col-8 bg-dark text-light p-4">
           {taskList.map((task, index) => {
             let cssDragTag = task.id === tagDrag.current.id ? "dragTag" : "";
-
+            if (task.id === tagDragEnter.current.id) {
+              return (
+                <animated.div
+                  style={{
+                    position: "relative",
+                    bottom: propsSpring.bottom.to(
+                      (numberBottom) => `${numberBottom}px`
+                    ),
+                  }}
+                  onDragStart={(e) => {
+                    handleDragStart(e, task, index);
+                  }}
+                  onDragEnter={(e) => handleDragEnter(e, task, index)}
+                  onDragEnd={handleDragEnd}
+                  draggable
+                  key={index}
+                  className={`bg-success p-4 m-2 ${cssDragTag}`}
+                >
+                  {task.taskName}
+                </animated.div>
+              );
+            }
             return (
               <div
                 onDragStart={(e) => {

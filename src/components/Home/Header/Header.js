@@ -91,6 +91,17 @@ export default function Header(props) {
                 Drag Drop
               </NavLink>
             </li>
+
+            <li className="nav-item">
+              <NavLink
+                activeStyle={{ fontWeight: "bold" }}
+                activeClassName="activeNavItem"
+                className="nav-link"
+                to="/dragdropdnd"
+              >
+                Drag Drop Dnd
+              </NavLink>
+            </li>x
             <li className="nav-item dropdown">
               <a
                 className="nav-link dropdown-toggle"
